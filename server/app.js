@@ -18,7 +18,7 @@ import { wholesalePublicRouter, wholesaleAdminRouter } from './wholesale-router.
 import { readConfig, root } from './config.js';
 import { createImageStorage, ImageError } from './image-storage.js';
 import { createHealthHandler } from './health.js';
-import { clientIpMiddleware, limiterIdentity } from './proxy-policy.js';
+import { limiterIdentity } from './rate-limit.js';
 
 export { root };
 const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 5 * 1024 * 1024, files: 1 } });
@@ -32,7 +32,7 @@ export function createApp({ config = readConfig(), storage = createImageStorage(
   const app = express();
   const ready = () => connection.readyState === 1;
   app.disable('x-powered-by');
-  // Never trust arbitrary X-Forwarded-For. Validated ingress identity is used by every limiter.
+  // Forwarding headers do not affect request identity or block proxied API requests.
   app.set('trust proxy', false);
   app.use(helmet({ contentSecurityPolicy: { directives: { defaultSrc: ["'self'"], imgSrc: ["'self'", 'data:', 'blob:'], styleSrc: ["'self'", "'unsafe-inline'"], fontSrc: ["'self'", 'data:'], scriptSrc: ["'self'"], connectSrc: ["'self'"], objectSrc: ["'none'"], upgradeInsecureRequests: process.env.NODE_ENV === 'production' ? [] : null } } }));
   app.use(express.json({ limit: '100kb' }));
@@ -41,7 +41,6 @@ export function createApp({ config = readConfig(), storage = createImageStorage(
     if ((!readiness.ready || readiness.shuttingDown) && req.path !== '/api/health') return res.status(503).json({ error: 'The application is not ready.' });
     next();
   });
-  app.use('/api', clientIpMiddleware(config.proxy));
   app.use(['/api/auth', '/api/admin'], (req, res, next) => { res.set('Cache-Control', 'no-store'); next(); });
   app.use('/api', (req, res, next) => {
     if (!['GET', 'HEAD', 'OPTIONS'].includes(req.method)) {

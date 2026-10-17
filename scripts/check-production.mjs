@@ -16,8 +16,9 @@ const databaseName = `masaloo_test_production_${randomUUID().replaceAll('-', '')
 const mongoUri = `mongodb://127.0.0.1:27017/${databaseName}`;
 const uploadDir = path.join(directory, 'uploads');
 const baseEnv = { ...process.env, NODE_ENV: 'production', MONGODB_URI: mongoUri, JWT_SECRET: 'production-smoke-test-only-secret-at-least-thirty-two-characters',
-  CLIENT_ORIGIN: 'https://store.example', UPLOAD_DIR: uploadDir, PROXY_MODE: 'direct', TRUSTED_PROXY_CIDRS: '', PROXY_HEADER_VERIFIED: '', DOTENV_CONFIG_PATH: emptyEnv };
-for (const key of ['ADMIN_NAME', 'ADMIN_EMAIL', 'ADMIN_PASSWORD', 'NODE_OPTIONS']) delete baseEnv[key];
+  CLIENT_ORIGIN: 'https://store.example', UPLOAD_DIR: uploadDir, DOTENV_CONFIG_PATH: emptyEnv };
+for (const key of ['ADMIN_NAME', 'ADMIN_EMAIL', 'ADMIN_PASSWORD', 'NODE_OPTIONS', 'PROXY_MODE', 'TRUSTED_PROXY_CIDRS', 'PROXY_HEADER_VERIFIED']) delete baseEnv[key];
+const railwayHeaders = { 'X-Real-IP': '198.51.100.1', 'X-Forwarded-For': '198.51.100.1', 'X-Forwarded-Proto': 'https', 'X-Forwarded-Host': 'store.example', Forwarded: 'for=198.51.100.1;proto=https' };
 
 async function freePort() {
   const probe = createServer(); await new Promise(resolve => probe.listen(0, '127.0.0.1', resolve));
@@ -63,9 +64,7 @@ async function stopFixture(fixture, signal) {
 try {
   await rejectStartup({ MONGODB_URI: '' }, /MONGODB_URI/);
   await rejectStartup({ CLIENT_ORIGIN: 'http://store.example' }, /HTTPS/);
-  await rejectStartup({ PROXY_MODE: '' }, /PROXY_MODE/);
-  await rejectStartup({ PROXY_MODE: 'trusted-real-ip', PROXY_HEADER_VERIFIED: '' }, /staging verification/);
-  console.log('PASS: real entry point refuses missing database, insecure origin, and unverified proxy configuration.');
+  console.log('PASS: real entry point refuses a missing database and insecure origin without requiring proxy settings.');
 
   await rejectStartup({ MONGODB_URI: `mongodb://127.0.0.1:${await freePort()}/${databaseName}` }, /MongoDB initialization failed/);
   console.log('PASS: unavailable local MongoDB stops production startup without a listening HTTP server or sample fallback.');
@@ -79,7 +78,7 @@ try {
   const bytes = await sharp({ create: { width: 8, height: 8, channels: 3, background: '#dbac54' } }).png().toBuffer();
   const image = await storage.writeImage(bytes), database = await connectTest(databaseName);
   let fixture = await startFixture();
-  const health = await fetch(fixture.base + '/api/health'); assert.equal(health.status, 200); assert.equal((await health.json()).database, 'connected');
+  const health = await fetch(fixture.base + '/api/health', { headers: railwayHeaders }); assert.equal(health.status, 200); assert.equal((await health.json()).database, 'connected');
   assert.equal(await database.collection('users').countDocuments(), 0);
   assert.equal(await database.collection('products').countDocuments(), 0);
   assert.equal(await database.collection('posts').countDocuments(), 0);
@@ -89,11 +88,18 @@ try {
   assert.equal((await fetch(fixture.base + '/uploads/missing.webp')).status, 404);
   console.log('PASS: production binds the configured port on 0.0.0.0, reports ready MongoDB, serves deep links/assets, and creates no owner or retail sample records.');
 
-  const registration = await fetch(fixture.base + '/api/auth/register', { method: 'POST', headers: { Origin: baseEnv.CLIENT_ORIGIN, 'Content-Type': 'application/json' }, body: JSON.stringify({ name: 'Test customer', email: 'customer@production.test', password: 'test-customer-password' }) });
+  const products = await fetch(fixture.base + '/api/products', { headers: railwayHeaders });
+  assert.equal(products.status, 200); assert.equal((await products.json()).sample, false);
+  const blogs = await fetch(fixture.base + '/api/blogs', { headers: railwayHeaders });
+  assert.equal(blogs.status, 200); assert.deepEqual((await blogs.json()).posts, []);
+  assert.equal((await fetch(fixture.base + '/api/auth/me', { headers: railwayHeaders })).status, 401);
+  console.log('PASS: Railway-style forwarding headers reach products, blogs, session authentication, and health without an ingress 503.');
+
+  const registration = await fetch(fixture.base + '/api/auth/register', { method: 'POST', headers: { ...railwayHeaders, Origin: baseEnv.CLIENT_ORIGIN, 'Content-Type': 'application/json' }, body: JSON.stringify({ name: 'Test customer', email: 'customer@production.test', password: 'test-customer-password' }) });
   assert.equal(registration.status, 201); const cookie = registration.headers.get('set-cookie');
   assert.match(cookie, /HttpOnly/); assert.match(cookie, /Secure/); assert.match(cookie, /SameSite=Strict/);
   assert.equal((await registration.json()).user.role, 'customer');
-  assert.equal((await fetch(fixture.base + '/api/auth/me', { headers: { Cookie: cookie.split(';')[0] } })).status, 200);
+  assert.equal((await fetch(fixture.base + '/api/auth/me', { headers: { ...railwayHeaders, Cookie: cookie.split(';')[0] } })).status, 200);
   assert.equal((await fetch(fixture.base + '/api/contact', { method: 'POST', headers: { Origin: 'http://localhost:4000' } })).status, 403);
   console.log('PASS: production customer sessions set Secure/HttpOnly/Strict cookies and enforce the canonical origin.');
 

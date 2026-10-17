@@ -10,7 +10,7 @@ import { wholesaleRegisterSchema, wholesaleLoginSchema, wholesaleProductSchema, 
 import { refreshWholesaleSource, sourceCategoryUrl } from './wholesale-import.js';
 import { escapedRegex } from './finance-reports.js';
 import { indiaToday, toPaise } from '../shared/sales.js';
-import { limiterIdentity } from './proxy-policy.js';
+import { limiterIdentity } from './rate-limit.js';
 
 const publicBuyer = buyer => ({ id: buyer.id || String(buyer._id), username: buyer.username, active: buyer.active, createdAt: buyer.createdAt });
 const cookies = () => ({ httpOnly: true, sameSite: 'strict', secure: process.env.NODE_ENV === 'production', path: '/', maxAge: 7 * 86400000 });

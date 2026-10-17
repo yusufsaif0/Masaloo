@@ -1,5 +1,7 @@
 # Masaloo local production-readiness report
 
+**Update, 17 October 2026:** The proxy configuration and ingress gate described in this historical report have been removed at the owner's request. The current application requires no `PROXY_MODE`, `TRUSTED_PROXY_CIDRS`, or `PROXY_HEADER_VERIFIED` settings. Forwarding headers do not block API requests. Login and role checks remain active; rate limits use the connection address, so visitors behind the same proxy may share a budget. The old proxy blockers and proxy deployment instructions below are superseded by the current README. Test results below describe the earlier implementation.
+
 17 October 2026. Local implementation and verification are complete. Production deployment remains gated by the staging checks below. No deployment, Atlas connection, migration, Git commit/push, or payment integration was performed.
 
 ## A. Files modified or added

@@ -1,6 +1,5 @@
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { readProxyPolicy } from './proxy-policy.js';
 
 export const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -36,5 +35,5 @@ export function readConfig(env = process.env) {
     origin = url.origin;
   }
   return { production, mode, port, host: production ? '0.0.0.0' : '127.0.0.1', mongoUri, origin,
-    uploadDir: uploadDirectory(env), proxy: readProxyPolicy(env, production), healthTimeoutMs: 1500, shutdownTimeoutMs: 25000 };
+    uploadDir: uploadDirectory(env), healthTimeoutMs: 1500, shutdownTimeoutMs: 25000 };
 }

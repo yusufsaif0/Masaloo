@@ -1,13 +1,13 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { createServer, request as httpRequest } from 'node:http';
+import { createServer } from 'node:http';
 import { EventEmitter } from 'node:events';
 import { mkdir, readFile, writeFile, symlink } from 'node:fs/promises';
 import path from 'node:path';
 import sharp from 'sharp';
 import express from 'express';
 import { readConfig, uploadDirectory, root } from '../config.js';
-import { normalizeIp } from '../proxy-policy.js';
+import { limiterIdentity } from '../rate-limit.js';
 import { createImageStorage } from '../image-storage.js';
 import { createHealthHandler } from '../health.js';
 import { createApp } from '../app.js';
@@ -17,7 +17,7 @@ import { scrapeWholesaleCatalog, sourceCategoryUrl } from '../wholesale-import.j
 import { temporaryTestDirectory, removeTestDirectory } from '../../scripts/test-support.mjs';
 
 const disconnected = { readyState: 0, db: null };
-const productionEnv = directory => ({ NODE_ENV: 'production', PORT: '4000', MONGODB_URI: 'mongodb://127.0.0.1:27017/masaloo_test_runtime_config', JWT_SECRET: 'runtime-test-secret-only-at-least-thirty-two-characters', CLIENT_ORIGIN: 'https://store.example/', UPLOAD_DIR: directory, PROXY_MODE: 'direct' });
+const productionEnv = directory => ({ NODE_ENV: 'production', PORT: '4000', MONGODB_URI: 'mongodb://127.0.0.1:27017/masaloo_test_runtime_config', JWT_SECRET: 'runtime-test-secret-only-at-least-thirty-two-characters', CLIENT_ORIGIN: 'https://store.example/', UPLOAD_DIR: directory });
 const developmentConfig = directory => readConfig({ NODE_ENV: 'test', UPLOAD_DIR: directory });
 async function temporary(t) { const directory = await temporaryTestDirectory(); t.after(() => removeTestDirectory(directory)); return directory; }
 async function serve(t, handler) {
@@ -26,7 +26,7 @@ async function serve(t, handler) {
   return { base: `http://127.0.0.1:${server.address().port}`, server };
 }
 
-test('production configuration requires database, secret, HTTPS origin, absolute storage, valid port, and explicit proxy policy', async t => {
+test('production configuration requires database, secret, HTTPS origin, absolute storage, and valid port without proxy settings', async t => {
   const directory = await temporary(t), env = productionEnv(directory);
   const config = readConfig(env);
   assert.equal(config.host, '0.0.0.0'); assert.equal(config.origin, 'https://store.example'); assert.equal(config.port, 4000);
@@ -37,17 +37,10 @@ test('production configuration requires database, secret, HTTPS origin, absolute
     { CLIENT_ORIGIN: '' }, { CLIENT_ORIGIN: 'http://store.example' }, { CLIENT_ORIGIN: 'https://user:password@store.example' },
     { CLIENT_ORIGIN: 'https://store.example/path' }, { CLIENT_ORIGIN: 'https://store.example/?query=1' },
     { UPLOAD_DIR: '' }, { UPLOAD_DIR: './uploads' }, { UPLOAD_DIR: root }, { UPLOAD_DIR: path.join(root, 'public/images') },
-    { PORT: 'NaN' }, { PORT: '0' }, { PORT: '65536' }, { PROXY_MODE: '' }, { PROXY_MODE: 'true' },
-    { PROXY_MODE: 'trusted-real-ip' }, { TRUSTED_PROXY_CIDRS: '127.0.0.1' },
-    { PROXY_MODE: 'trusted-real-ip', PROXY_HEADER_VERIFIED: 'true', TRUSTED_PROXY_CIDRS: '0.0.0.0/0' },
-    { PROXY_MODE: 'trusted-real-ip', PROXY_HEADER_VERIFIED: 'true', TRUSTED_PROXY_CIDRS: '10.0.0.0/8' },
-    { PROXY_MODE: 'trusted-real-ip', PROXY_HEADER_VERIFIED: 'true', TRUSTED_PROXY_CIDRS: '::/0' },
+    { PORT: 'NaN' }, { PORT: '0' }, { PORT: '65536' },
   ]) assert.throws(() => readConfig({ ...env, ...override }), Error, JSON.stringify(Object.keys(override)));
-  assert.equal(normalizeIp('::ffff:192.0.2.1'), '192.0.2.1');
-  assert.equal(normalizeIp('2001:0db8:0000::1'), '2001:db8::1');
-  assert.equal(normalizeIp('192.0.2.1:1234'), null); assert.equal(normalizeIp('192.0.2.1, 192.0.2.2'), null);
-  const ipv6 = readConfig({ ...env, PROXY_MODE: 'trusted-real-ip', PROXY_HEADER_VERIFIED: 'true', TRUSTED_PROXY_CIDRS: '2001:db8:1::/64' }).proxy;
-  assert.equal(ipv6.trustsPeer('2001:db8:1::5'), true); assert.equal(ipv6.trustsPeer('2001:db8:2::5'), false);
+  // Old host settings can remain during rollout without blocking startup.
+  assert.equal(readConfig({ ...env, PROXY_MODE: 'direct', TRUSTED_PROXY_CIDRS: '<old-value>', PROXY_HEADER_VERIFIED: 'false' }).host, '0.0.0.0');
 });
 
 test('database and index initialization failures abort production without running catalog seeds', async () => {
@@ -117,8 +110,8 @@ test('production never serves sample catalog during a database outage and reject
   assert.equal((await fetch(base + '/shop')).status, 503);
 });
 
-test('direct-mode authentication limits cannot be bypassed with spoofed forwarding headers', async t => {
-  const directory = await temporary(t), config = developmentConfig(directory);
+test('production authentication limits cannot be bypassed with spoofed forwarding headers', async t => {
+  const directory = await temporary(t), config = readConfig(productionEnv(directory));
   const { base } = await serve(t, createApp({ config, connection: disconnected }));
   for (let i = 0; i < 30; i++) {
     const response = await fetch(base + '/api/auth/login', { method: 'POST', headers: { 'X-Forwarded-For': `192.0.2.${i+1}`, 'X-Real-IP': `198.51.100.${i+1}`, Forwarded: `for=192.0.2.${i+1}` } });
@@ -127,35 +120,29 @@ test('direct-mode authentication limits cannot be bypassed with spoofed forwardi
   assert.equal((await fetch(base + '/api/auth/admin-login', { method: 'POST', headers: { 'X-Forwarded-For': '203.0.113.9' } })).status, 429);
 });
 
-test('production direct mode rejects forwarding headers instead of silently enabling proxy trust', async t => {
+test('production API accepts Railway forwarding headers without an ingress gate', async t => {
   const directory = await temporary(t), config = readConfig(productionEnv(directory));
-  const { base } = await serve(t, createApp({ config, connection: disconnected }));
-  const response = await fetch(base + '/api/auth/login', { method: 'POST', headers: { 'X-Real-IP': '192.0.2.1' } });
-  assert.equal(response.status, 503); assert.match((await response.json()).error, /ingress/);
+  const previousSecret = process.env.JWT_SECRET; process.env.JWT_SECRET = productionEnv(directory).JWT_SECRET;
+  t.after(() => { if (previousSecret === undefined) delete process.env.JWT_SECRET; else process.env.JWT_SECRET = previousSecret; });
+  const app = createApp({ config, connection: { readyState: 1, db: { command: async () => ({ ok: 1 }) } } });
+  assert.equal(app.get('trust proxy'), false);
+  const { base } = await serve(t, app);
+  const headers = { 'X-Real-IP': '198.51.100.1', 'X-Forwarded-For': '198.51.100.1', 'X-Forwarded-Proto': 'https', 'X-Forwarded-Host': 'store.example', Forwarded: 'for=198.51.100.1;proto=https' };
+  for (const overrides of [{}, { 'X-Real-IP': '' }, { 'X-Real-IP': 'invalid, duplicate' }]) {
+    const response = await fetch(base + '/api/health', { headers: { ...headers, ...overrides } });
+    assert.equal(response.status, 200); assert.equal((await response.json()).database, 'connected');
+  }
+  const session = await fetch(base + '/api/auth/me', { headers });
+  assert.equal(session.status, 401); assert.match((await session.json()).error, /sign in/);
+  assert.equal((await fetch(base + '/api/missing', { headers })).status, 404);
 });
 
-test('trusted-real-ip mode requires the allowlisted socket peer and a single valid client IP', async t => {
-  const directory = await temporary(t);
-  const env = { ...productionEnv(directory), PROXY_MODE: 'trusted-real-ip', PROXY_HEADER_VERIFIED: 'true', TRUSTED_PROXY_CIDRS: '192.0.2.20/32' };
-  const untrusted = await serve(t, createApp({ config: readConfig(env), connection: disconnected }));
-  const rejected = await fetch(untrusted.base + '/api/auth/login', { method: 'POST', headers: { 'X-Real-IP': '198.51.100.1', 'X-Forwarded-For': '192.0.2.20' } });
-  assert.match((await rejected.json()).error, /ingress/);
-  // Loopback here is a known local test fixture, not a proposed Railway proxy address.
-  const { base } = await serve(t, createApp({ config: readConfig({ ...env, TRUSTED_PROXY_CIDRS: '127.0.0.1/32' }), connection: { readyState: 1, db: { command: async () => ({ ok: 1 }) } } }));
-  for (const value of ['', '198.51.100.1, 198.51.100.2', '198.51.100.1:2345', 'garbage']) {
-    const response = await fetch(base + '/api/auth/login', { method: 'POST', headers: { 'X-Real-IP': value } });
-    assert.match((await response.json()).error, /ingress/);
-  }
-  const duplicate = await new Promise((resolve, reject) => {
-    const req = httpRequest(base + '/api/auth/login', { method: 'POST', headers: { 'X-Real-IP': ['198.51.100.1', '198.51.100.2'] } }, res => { res.resume(); res.on('end', () => resolve(res.statusCode)); }); req.on('error', reject); req.end();
-  });
-  assert.equal(duplicate, 503);
-  for (let i = 0; i < 30; i++) {
-    const response = await fetch(base + '/api/auth/login', { method: 'POST', headers: { 'X-Real-IP': `2001:db8:11::${i+1}`, 'X-Forwarded-For': `192.0.2.${i+1}` } });
-    assert.equal(response.status, 503);
-  }
-  assert.equal((await fetch(base + '/api/auth/login', { method: 'POST', headers: { 'X-Real-IP': '2001:db8:11::abcd', 'X-Forwarded-For': '203.0.113.1' } })).status, 429);
-  assert.equal((await fetch(base + '/api/auth/login', { method: 'POST', headers: { 'X-Real-IP': '198.51.100.2' } })).status, 503);
+test('socket-based rate limits normalize mapped IPv4 and group IPv6 without reading headers', () => {
+  const key = (remoteAddress, headers = {}) => limiterIdentity.keyGenerator({ socket: { remoteAddress }, headers });
+  assert.equal(key('::ffff:192.0.2.1'), key('192.0.2.1'));
+  assert.equal(key('2001:db8:11:1200::1'), key('2001:db8:11:12ff::2'));
+  assert.notEqual(key('2001:db8:11:1200::1'), key('2001:db8:11:1300::1'));
+  assert.equal(key('192.0.2.1', { 'x-real-ip': '198.51.100.1' }), key('192.0.2.1', { 'x-real-ip': '203.0.113.1' }));
 });
 
 test('local WebP uploads survive app restart, never overwrite existing images, and missing assets do not return SPA HTML', async t => {

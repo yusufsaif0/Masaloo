@@ -17,8 +17,5 @@ export async function removeTestDirectory(directory) {
 export async function isolateTestUploads() {
   const directory = await temporaryTestDirectory();
   process.env.UPLOAD_DIR = directory;
-  // No inherited staging/hosting trust configuration is allowed in isolated local tests.
-  process.env.PROXY_MODE = 'direct';
-  delete process.env.TRUSTED_PROXY_CIDRS; delete process.env.PROXY_HEADER_VERIFIED;
   return directory;
 }

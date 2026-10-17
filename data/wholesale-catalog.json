@@ -1,0 +1,674 @@
+{
+  "requestedSourceUrl": "https://www.nutsnspices.in/categories/80689/Spices",
+  "sourceCategoryUrl": "https://www.nutsnspices.in/categories/80704/spices-whole",
+  "fetchedAt": "2026-10-17T06:11:40.308Z",
+  "products": [
+    {
+      "id": "nns-2507000",
+      "name": "Ajwain",
+      "category": "Seeds",
+      "description": "Ajwain in seed form for bulk purchasing and commercial kitchens. Enquire about the quantity, grade, and packing that suits your business.",
+      "image": "/images/wholesale-2507000-80d9fcaa47.webp",
+      "unitPricePaise": null,
+      "minOrderKg": 5,
+      "stockKg": null,
+      "active": true,
+      "source": {
+        "productId": "2507000",
+        "url": "https://www.nutsnspices.in/categories/80704/spices-whole",
+        "imageUrl": "https://cdn.rodeodigital.com/admin/product/be8381d8-783e-44e4-9aa4-98c966f35087-Ajwain.jpg",
+        "image": "/images/wholesale-2507000-80d9fcaa47.webp",
+        "fetchedAt": "2026-10-17T06:11:37.488Z",
+        "packs": [
+          {
+            "label": "100g",
+            "retailPricePaise": 5500,
+            "mrpPaise": 5500
+          }
+        ]
+      }
+    },
+    {
+      "id": "nns-2507128",
+      "name": "Anardana",
+      "category": "Seeds",
+      "description": "Anardana in seed form for bulk purchasing and commercial kitchens. Enquire about the quantity, grade, and packing that suits your business.",
+      "image": "/images/wholesale-2507128-690f30a961.webp",
+      "unitPricePaise": null,
+      "minOrderKg": 5,
+      "stockKg": null,
+      "active": true,
+      "source": {
+        "productId": "2507128",
+        "url": "https://www.nutsnspices.in/categories/80704/spices-whole",
+        "imageUrl": "https://cdn.rodeodigital.com/admin/product/65d5b8c4-b389-4ea4-a41c-cdb157b3c13d-Anardana.JPG",
+        "image": "/images/wholesale-2507128-690f30a961.webp",
+        "fetchedAt": "2026-10-17T06:11:37.553Z",
+        "packs": [
+          {
+            "label": "100g",
+            "retailPricePaise": 6000,
+            "mrpPaise": 6000
+          }
+        ]
+      }
+    },
+    {
+      "id": "nns-2507065",
+      "name": "Black Cardamom",
+      "category": "Whole spices",
+      "description": "Black Cardamom in whole spice form for bulk purchasing and commercial kitchens. Enquire about the quantity, grade, and packing that suits your business.",
+      "image": "/images/wholesale-2507065-779ef96742.webp",
+      "unitPricePaise": null,
+      "minOrderKg": 5,
+      "stockKg": null,
+      "active": true,
+      "source": {
+        "productId": "2507065",
+        "url": "https://www.nutsnspices.in/categories/80704/spices-whole",
+        "imageUrl": "https://cdn.rodeodigital.com/admin/product/c59598af-e58a-4fa4-96db-bc434a817046-Blackcardamom.JPG",
+        "image": "/images/wholesale-2507065-779ef96742.webp",
+        "fetchedAt": "2026-10-17T06:11:37.616Z",
+        "packs": [
+          {
+            "label": "50g",
+            "retailPricePaise": 18000,
+            "mrpPaise": 18000
+          }
+        ]
+      }
+    },
+    {
+      "id": "nns-2507003",
+      "name": "Black Jeera (Kalonjee)",
+      "category": "Seeds",
+      "description": "Black Jeera (Kalonjee) in seed form for bulk purchasing and commercial kitchens. Enquire about the quantity, grade, and packing that suits your business.",
+      "image": "/images/wholesale-2507003-e13316df17.webp",
+      "unitPricePaise": null,
+      "minOrderKg": 5,
+      "stockKg": null,
+      "active": true,
+      "source": {
+        "productId": "2507003",
+        "url": "https://www.nutsnspices.in/categories/80704/spices-whole",
+        "imageUrl": "https://cdn.rodeodigital.com/admin/product/368e8f70-6f58-4b94-ab09-1c62334d1b54-Blackjeera.JPG",
+        "image": "/images/wholesale-2507003-e13316df17.webp",
+        "fetchedAt": "2026-10-17T06:11:37.678Z",
+        "packs": [
+          {
+            "label": "100g",
+            "retailPricePaise": 6000,
+            "mrpPaise": 6000
+          }
+        ]
+      }
+    },
+    {
+      "id": "nns-2507004",
+      "name": "Black Pepper",
+      "category": "Whole spices",
+      "description": "Black Pepper in whole spice form for bulk purchasing and commercial kitchens. Enquire about the quantity, grade, and packing that suits your business.",
+      "image": "/images/wholesale-2507004-ed18360643.webp",
+      "unitPricePaise": null,
+      "minOrderKg": 5,
+      "stockKg": null,
+      "active": true,
+      "source": {
+        "productId": "2507004",
+        "url": "https://www.nutsnspices.in/categories/80704/spices-whole",
+        "imageUrl": "https://cdn.rodeodigital.com/admin/product/1dcee444-7352-4726-804e-f98956d65e77-Blackpepper.JPG",
+        "image": "/images/wholesale-2507004-ed18360643.webp",
+        "fetchedAt": "2026-10-17T06:11:37.740Z",
+        "packs": [
+          {
+            "label": "250g",
+            "retailPricePaise": 37500,
+            "mrpPaise": 37500
+          },
+          {
+            "label": "100g",
+            "retailPricePaise": 15500,
+            "mrpPaise": 15500
+          }
+        ]
+      }
+    },
+    {
+      "id": "nns-2507005",
+      "name": "Black Sesame",
+      "category": "Seeds",
+      "description": "Black Sesame in seed form for bulk purchasing and commercial kitchens. Enquire about the quantity, grade, and packing that suits your business.",
+      "image": "/images/wholesale-2507005-25ec3b8680.webp",
+      "unitPricePaise": null,
+      "minOrderKg": 5,
+      "stockKg": null,
+      "active": true,
+      "source": {
+        "productId": "2507005",
+        "url": "https://www.nutsnspices.in/categories/80704/spices-whole",
+        "imageUrl": "https://cdn.rodeodigital.com/admin/product/86bfb308-8037-4954-9dd0-1c4987356556-Blacksesameseeds.jpg",
+        "image": "/images/wholesale-2507005-25ec3b8680.webp",
+        "fetchedAt": "2026-10-17T06:11:37.796Z",
+        "packs": [
+          {
+            "label": "250g",
+            "retailPricePaise": 9000,
+            "mrpPaise": 9000
+          }
+        ]
+      }
+    },
+    {
+      "id": "nns-2507155",
+      "name": "Cardamom",
+      "category": "Whole spices",
+      "description": "Cardamom in whole spice form for bulk purchasing and commercial kitchens. Enquire about the quantity, grade, and packing that suits your business.",
+      "image": "/images/wholesale-2507155-9e5549db89.webp",
+      "unitPricePaise": null,
+      "minOrderKg": 5,
+      "stockKg": null,
+      "active": true,
+      "source": {
+        "productId": "2507155",
+        "url": "https://www.nutsnspices.in/categories/80704/spices-whole",
+        "imageUrl": "https://cdn.rodeodigital.com/admin/product/9589efed-f9bd-4f2c-afe6-b20087ab4827-Cardamom.jpg",
+        "image": "/images/wholesale-2507155-9e5549db89.webp",
+        "fetchedAt": "2026-10-17T06:11:37.872Z",
+        "packs": [
+          {
+            "label": "100g",
+            "retailPricePaise": 76000,
+            "mrpPaise": 76000
+          },
+          {
+            "label": "50g",
+            "retailPricePaise": 38000,
+            "mrpPaise": 38000
+          }
+        ]
+      }
+    },
+    {
+      "id": "nns-2506429",
+      "name": "Cardamom Seeds",
+      "category": "Seeds",
+      "description": "Cardamom Seeds in seed form for bulk purchasing and commercial kitchens. Enquire about the quantity, grade, and packing that suits your business.",
+      "image": "/images/wholesale-2506429-cdb3b7fb56.webp",
+      "unitPricePaise": null,
+      "minOrderKg": 5,
+      "stockKg": null,
+      "active": true,
+      "source": {
+        "productId": "2506429",
+        "url": "https://www.nutsnspices.in/categories/80704/spices-whole",
+        "imageUrl": "https://cdn.rodeodigital.com/common/master/906021.jpg",
+        "image": "/images/wholesale-2506429-cdb3b7fb56.webp",
+        "fetchedAt": "2026-10-17T06:11:38.029Z",
+        "packs": [
+          {
+            "label": "50g",
+            "retailPricePaise": 42500,
+            "mrpPaise": 42500
+          }
+        ]
+      }
+    },
+    {
+      "id": "nns-2507111",
+      "name": "Cinnamon",
+      "category": "Whole spices",
+      "description": "Cinnamon in whole spice form for bulk purchasing and commercial kitchens. Enquire about the quantity, grade, and packing that suits your business.",
+      "image": "/images/wholesale-2507111-7a6d37d4ca.webp",
+      "unitPricePaise": null,
+      "minOrderKg": 5,
+      "stockKg": null,
+      "active": true,
+      "source": {
+        "productId": "2507111",
+        "url": "https://www.nutsnspices.in/categories/80704/spices-whole",
+        "imageUrl": "https://cdn.rodeodigital.com/admin/product/9292194a-47c3-4b91-b0e8-a5657a54eae3-Cinnamon.JPG",
+        "image": "/images/wholesale-2507111-7a6d37d4ca.webp",
+        "fetchedAt": "2026-10-17T06:11:38.086Z",
+        "packs": [
+          {
+            "label": "100g",
+            "retailPricePaise": 6000,
+            "mrpPaise": 6000
+          }
+        ]
+      }
+    },
+    {
+      "id": "nns-2507152",
+      "name": "Cinnamon Ceylon",
+      "category": "Whole spices",
+      "description": "Cinnamon Ceylon in whole spice form for bulk purchasing and commercial kitchens. Enquire about the quantity, grade, and packing that suits your business.",
+      "image": "/images/wholesale-2507152-ee699981cb.webp",
+      "unitPricePaise": null,
+      "minOrderKg": 5,
+      "stockKg": null,
+      "active": true,
+      "source": {
+        "productId": "2507152",
+        "url": "https://www.nutsnspices.in/categories/80704/spices-whole",
+        "imageUrl": "https://cdn.rodeodigital.com/admin/product/b51b808d-9d63-4546-bcee-e6d8b4947f87-CinnamonCeylon-2.jpg",
+        "image": "/images/wholesale-2507152-ee699981cb.webp",
+        "fetchedAt": "2026-10-17T06:11:38.150Z",
+        "packs": [
+          {
+            "label": "100g",
+            "retailPricePaise": 32000,
+            "mrpPaise": 32000
+          }
+        ]
+      }
+    },
+    {
+      "id": "nns-2507148",
+      "name": "Cinnamon Special",
+      "category": "Whole spices",
+      "description": "Cinnamon Special in whole spice form for bulk purchasing and commercial kitchens. Enquire about the quantity, grade, and packing that suits your business.",
+      "image": "/images/wholesale-2507148-181d8b3943.webp",
+      "unitPricePaise": null,
+      "minOrderKg": 5,
+      "stockKg": null,
+      "active": true,
+      "source": {
+        "productId": "2507148",
+        "url": "https://www.nutsnspices.in/categories/80704/spices-whole",
+        "imageUrl": "https://cdn.rodeodigital.com/admin/product/fc0f0e06-2d7a-4e05-b342-8806b0482bf4-Cinnamonspecial.JPG",
+        "image": "/images/wholesale-2507148-181d8b3943.webp",
+        "fetchedAt": "2026-10-17T06:11:38.203Z",
+        "packs": [
+          {
+            "label": "100g",
+            "retailPricePaise": 10000,
+            "mrpPaise": 10000
+          },
+          {
+            "label": "250g",
+            "retailPricePaise": 25000,
+            "mrpPaise": 25000
+          }
+        ]
+      }
+    },
+    {
+      "id": "nns-2506982",
+      "name": "Clove",
+      "category": "Whole spices",
+      "description": "Clove in whole spice form for bulk purchasing and commercial kitchens. Enquire about the quantity, grade, and packing that suits your business.",
+      "image": "/images/wholesale-2506982-ae031d4500.webp",
+      "unitPricePaise": null,
+      "minOrderKg": 5,
+      "stockKg": null,
+      "active": true,
+      "source": {
+        "productId": "2506982",
+        "url": "https://www.nutsnspices.in/categories/80704/spices-whole",
+        "imageUrl": "https://cdn.rodeodigital.com/admin/product/1a254c25-d9c7-4d65-9d94-e08ea66bcc18-Clove.JPG",
+        "image": "/images/wholesale-2506982-ae031d4500.webp",
+        "fetchedAt": "2026-10-17T06:11:38.256Z",
+        "packs": [
+          {
+            "label": "100g",
+            "retailPricePaise": 20000,
+            "mrpPaise": 20000
+          },
+          {
+            "label": "50g",
+            "retailPricePaise": 10000,
+            "mrpPaise": 10000
+          }
+        ]
+      }
+    },
+    {
+      "id": "nns-2507027",
+      "name": "Coriander Seeds",
+      "category": "Seeds",
+      "description": "Coriander Seeds in seed form for bulk purchasing and commercial kitchens. Enquire about the quantity, grade, and packing that suits your business.",
+      "image": "/images/wholesale-2507027-12349a0eac.webp",
+      "unitPricePaise": null,
+      "minOrderKg": 5,
+      "stockKg": null,
+      "active": true,
+      "source": {
+        "productId": "2507027",
+        "url": "https://www.nutsnspices.in/categories/80704/spices-whole",
+        "imageUrl": "https://cdn.rodeodigital.com/admin/product/bf13210a-4e77-4b62-8b45-43b4ef46dc86-Corianderseeds.JPG",
+        "image": "/images/wholesale-2507027-12349a0eac.webp",
+        "fetchedAt": "2026-10-17T06:11:38.307Z",
+        "packs": [
+          {
+            "label": "250g",
+            "retailPricePaise": 9500,
+            "mrpPaise": 9500
+          },
+          {
+            "label": "500g",
+            "retailPricePaise": 19000,
+            "mrpPaise": 19000
+          }
+        ]
+      }
+    },
+    {
+      "id": "nns-2507007",
+      "name": "Cumin Seeds (Jeera)",
+      "category": "Seeds",
+      "description": "Cumin Seeds (Jeera) in seed form for bulk purchasing and commercial kitchens. Enquire about the quantity, grade, and packing that suits your business.",
+      "image": "/images/wholesale-2507007-a72159087d.webp",
+      "unitPricePaise": null,
+      "minOrderKg": 5,
+      "stockKg": null,
+      "active": true,
+      "source": {
+        "productId": "2507007",
+        "url": "https://www.nutsnspices.in/categories/80704/spices-whole",
+        "imageUrl": "https://cdn.rodeodigital.com/admin/product/a04e3078-0562-4c98-96dc-e5700a59fb9e-Cuminseeds.jpg",
+        "image": "/images/wholesale-2507007-a72159087d.webp",
+        "fetchedAt": "2026-10-17T06:11:38.364Z",
+        "packs": [
+          {
+            "label": "250g",
+            "retailPricePaise": 16000,
+            "mrpPaise": 16000
+          },
+          {
+            "label": "100g",
+            "retailPricePaise": 6500,
+            "mrpPaise": 6500
+          }
+        ]
+      }
+    },
+    {
+      "id": "nns-2507127",
+      "name": "Dill Seeds",
+      "category": "Seeds",
+      "description": "Dill Seeds in seed form for bulk purchasing and commercial kitchens. Enquire about the quantity, grade, and packing that suits your business.",
+      "image": "/images/wholesale-2507127-fea24b2bf7.webp",
+      "unitPricePaise": null,
+      "minOrderKg": 5,
+      "stockKg": null,
+      "active": true,
+      "source": {
+        "productId": "2507127",
+        "url": "https://www.nutsnspices.in/categories/80704/spices-whole",
+        "imageUrl": "https://cdn.rodeodigital.com/common/master/227012.jpg",
+        "image": "/images/wholesale-2507127-fea24b2bf7.webp",
+        "fetchedAt": "2026-10-17T06:11:38.415Z",
+        "packs": [
+          {
+            "label": "100g",
+            "retailPricePaise": 4500,
+            "mrpPaise": 4500
+          }
+        ]
+      }
+    },
+    {
+      "id": "nns-2507009",
+      "name": "Dry Ginger",
+      "category": "Dried herbs & roots",
+      "description": "Dried ginger for grinding, cooking, and commercial spice preparation. Enquire about bulk packing and the quantity you need.",
+      "image": "/images/wholesale-2507009-dc14537ca9.webp",
+      "unitPricePaise": null,
+      "minOrderKg": 5,
+      "stockKg": null,
+      "active": true,
+      "source": {
+        "productId": "2507009",
+        "url": "https://www.nutsnspices.in/categories/80704/spices-whole",
+        "imageUrl": "https://cdn.rodeodigital.com/admin/product/842e87bf-feb1-4f40-a9d5-d2ed2a652a42-Dryginger.jpg",
+        "image": "/images/wholesale-2507009-dc14537ca9.webp",
+        "fetchedAt": "2026-10-17T06:11:38.466Z",
+        "packs": [
+          {
+            "label": "100g",
+            "retailPricePaise": 8000,
+            "mrpPaise": 8000
+          }
+        ]
+      }
+    },
+    {
+      "id": "nns-2507011",
+      "name": "Fennel Seeds (Saunf)",
+      "category": "Seeds",
+      "description": "Fennel Seeds (Saunf) in seed form for bulk purchasing and commercial kitchens. Enquire about the quantity, grade, and packing that suits your business.",
+      "image": "/images/wholesale-2507011-6a5c32a389.webp",
+      "unitPricePaise": null,
+      "minOrderKg": 5,
+      "stockKg": null,
+      "active": true,
+      "source": {
+        "productId": "2507011",
+        "url": "https://www.nutsnspices.in/categories/80704/spices-whole",
+        "imageUrl": "https://cdn.rodeodigital.com/admin/product/89cb0449-2af5-4687-901d-371edb84b169-Fennelseeds.jpg",
+        "image": "/images/wholesale-2507011-6a5c32a389.webp",
+        "fetchedAt": "2026-10-17T06:11:38.524Z",
+        "packs": [
+          {
+            "label": "250g",
+            "retailPricePaise": 19500,
+            "mrpPaise": 19500
+          },
+          {
+            "label": "100g",
+            "retailPricePaise": 8000,
+            "mrpPaise": 8000
+          }
+        ]
+      }
+    },
+    {
+      "id": "nns-2507012",
+      "name": "Fenugreek Seeds",
+      "category": "Seeds",
+      "description": "Fenugreek Seeds in seed form for bulk purchasing and commercial kitchens. Enquire about the quantity, grade, and packing that suits your business.",
+      "image": "/images/wholesale-2507012-06ecf6894b.webp",
+      "unitPricePaise": null,
+      "minOrderKg": 5,
+      "stockKg": null,
+      "active": true,
+      "source": {
+        "productId": "2507012",
+        "url": "https://www.nutsnspices.in/categories/80704/spices-whole",
+        "imageUrl": "https://cdn.rodeodigital.com/admin/product/519975f7-3429-42c4-91ee-7abf5b04ca84-Fenugreekseeds.JPG",
+        "image": "/images/wholesale-2507012-06ecf6894b.webp",
+        "fetchedAt": "2026-10-17T06:11:38.588Z",
+        "packs": [
+          {
+            "label": "250g",
+            "retailPricePaise": 5500,
+            "mrpPaise": 5500
+          }
+        ]
+      }
+    },
+    {
+      "id": "nns-2507641",
+      "name": "Kashmir Whole Chilli",
+      "category": "Whole spices",
+      "description": "Kashmir Whole Chilli in whole spice form for bulk purchasing and commercial kitchens. Enquire about the quantity, grade, and packing that suits your business.",
+      "image": "/images/wholesale-2507641-b3b5582e2f.webp",
+      "unitPricePaise": null,
+      "minOrderKg": 5,
+      "stockKg": null,
+      "active": true,
+      "source": {
+        "productId": "2507641",
+        "url": "https://www.nutsnspices.in/categories/80704/spices-whole",
+        "imageUrl": "https://cdn.rodeodigital.com/common/master/229013.jpg",
+        "image": "/images/wholesale-2507641-b3b5582e2f.webp",
+        "fetchedAt": "2026-10-17T06:11:38.628Z",
+        "packs": [
+          {
+            "label": "250g",
+            "retailPricePaise": 42500,
+            "mrpPaise": 42500
+          }
+        ]
+      }
+    },
+    {
+      "id": "nns-2507103",
+      "name": "Kasuri Methi",
+      "category": "Dried herbs & roots",
+      "description": "Dried fenugreek leaves for savoury gravies and seasoning blends. Available for bulk enquiries; share your packing and volume requirements.",
+      "image": "/images/wholesale-2507103-f4a5beee8b.webp",
+      "unitPricePaise": null,
+      "minOrderKg": 5,
+      "stockKg": null,
+      "active": true,
+      "source": {
+        "productId": "2507103",
+        "url": "https://www.nutsnspices.in/categories/80704/spices-whole",
+        "imageUrl": "https://cdn.rodeodigital.com/common/master/225102.jpg",
+        "image": "/images/wholesale-2507103-f4a5beee8b.webp",
+        "fetchedAt": "2026-10-17T06:11:38.662Z",
+        "packs": [
+          {
+            "label": "50g",
+            "retailPricePaise": 4000,
+            "mrpPaise": 4000
+          }
+        ]
+      }
+    },
+    {
+      "id": "nns-2507015",
+      "name": "Marathi Moggu",
+      "category": "Whole spices",
+      "description": "Marathi Moggu in whole spice form for bulk purchasing and commercial kitchens. Enquire about the quantity, grade, and packing that suits your business.",
+      "image": "/images/wholesale-2507015-6d1905b637.webp",
+      "unitPricePaise": null,
+      "minOrderKg": 5,
+      "stockKg": null,
+      "active": true,
+      "source": {
+        "productId": "2507015",
+        "url": "https://www.nutsnspices.in/categories/80704/spices-whole",
+        "imageUrl": "https://cdn.rodeodigital.com/admin/product/8dae081d-005f-4d05-90e2-4dd19b1e2e52-Marathimoggu.JPG",
+        "image": "/images/wholesale-2507015-6d1905b637.webp",
+        "fetchedAt": "2026-10-17T06:11:38.710Z",
+        "packs": [
+          {
+            "label": "50g",
+            "retailPricePaise": 5000,
+            "mrpPaise": 5000
+          }
+        ]
+      }
+    },
+    {
+      "id": "nns-2507621",
+      "name": "Methi Dal",
+      "category": "Seeds",
+      "description": "Split fenugreek for pickling and seasoning. Discuss bulk quantities, packing, and your preferred delivery schedule with our team.",
+      "image": "/images/wholesale-2507621-619a81f12e.webp",
+      "unitPricePaise": null,
+      "minOrderKg": 5,
+      "stockKg": null,
+      "active": true,
+      "source": {
+        "productId": "2507621",
+        "url": "https://www.nutsnspices.in/categories/80704/spices-whole",
+        "imageUrl": "https://cdn.rodeodigital.com/common/master/224122.jpg",
+        "image": "/images/wholesale-2507621-619a81f12e.webp",
+        "fetchedAt": "2026-10-17T06:11:38.748Z",
+        "packs": [
+          {
+            "label": "100g",
+            "retailPricePaise": 3800,
+            "mrpPaise": 3800
+          }
+        ]
+      }
+    },
+    {
+      "id": "nns-2506984",
+      "name": "Mustard Seeds",
+      "category": "Seeds",
+      "description": "Mustard Seeds in seed form for bulk purchasing and commercial kitchens. Enquire about the quantity, grade, and packing that suits your business.",
+      "image": "/images/wholesale-2506984-444c1e2cad.webp",
+      "unitPricePaise": null,
+      "minOrderKg": 5,
+      "stockKg": null,
+      "active": true,
+      "source": {
+        "productId": "2506984",
+        "url": "https://www.nutsnspices.in/categories/80704/spices-whole",
+        "imageUrl": "https://cdn.rodeodigital.com/admin/product/67d634b9-726d-41a4-acca-78c3784afbdb-MustardSeeds.jpg",
+        "image": "/images/wholesale-2506984-444c1e2cad.webp",
+        "fetchedAt": "2026-10-17T06:11:38.801Z",
+        "packs": [
+          {
+            "label": "250g",
+            "retailPricePaise": 5500,
+            "mrpPaise": 5500
+          },
+          {
+            "label": "500g",
+            "retailPricePaise": 11000,
+            "mrpPaise": 11000
+          }
+        ]
+      }
+    },
+    {
+      "id": "nns-2507316",
+      "name": "Nutmace",
+      "category": "Whole spices",
+      "description": "Nutmace in whole spice form for bulk purchasing and commercial kitchens. Enquire about the quantity, grade, and packing that suits your business.",
+      "image": "/images/wholesale-2507316-37cb4b5b25.webp",
+      "unitPricePaise": null,
+      "minOrderKg": 5,
+      "stockKg": null,
+      "active": true,
+      "source": {
+        "productId": "2507316",
+        "url": "https://www.nutsnspices.in/categories/80704/spices-whole",
+        "imageUrl": "https://cdn.rodeodigital.com/admin/product/fb4c57aa-dcb8-4bad-ab06-e024f41ebb0d-Nutmace.JPG",
+        "image": "/images/wholesale-2507316-37cb4b5b25.webp",
+        "fetchedAt": "2026-10-17T06:11:39.551Z",
+        "packs": [
+          {
+            "label": "25g",
+            "retailPricePaise": 14000,
+            "mrpPaise": 14000
+          }
+        ]
+      }
+    },
+    {
+      "id": "nns-2507018",
+      "name": "Nutmeg",
+      "category": "Whole spices",
+      "description": "Nutmeg in whole spice form for bulk purchasing and commercial kitchens. Enquire about the quantity, grade, and packing that suits your business.",
+      "image": "/images/wholesale-2507018-3bcfb662cb.webp",
+      "unitPricePaise": null,
+      "minOrderKg": 5,
+      "stockKg": null,
+      "active": true,
+      "source": {
+        "productId": "2507018",
+        "url": "https://www.nutsnspices.in/categories/80704/spices-whole",
+        "imageUrl": "https://cdn.rodeodigital.com/admin/product/cba20def-6a36-4016-97f4-41211fb07ae6-Nutmeg.jpg",
+        "image": "/images/wholesale-2507018-3bcfb662cb.webp",
+        "fetchedAt": "2026-10-17T06:11:40.308Z",
+        "packs": [
+          {
+            "label": "25g",
+            "retailPricePaise": 4000,
+            "mrpPaise": 4000
+          }
+        ]
+      }
+    }
+  ],
+  "failures": [],
+  "scope": "First public page of the whole-spice subcategory; not the entire retailer catalog."
+}

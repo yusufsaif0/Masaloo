@@ -7,6 +7,7 @@ import { readConfig, root } from './config.js';
 import { createImageStorage } from './image-storage.js';
 import { Product, Post, User, Message, Subscriber, Setup } from './models.js';
 import { LedgerCustomer, Sale } from './finance-models.js';
+import { BusinessContact, ExpenseRecord } from './operations-models.js';
 import { WholesaleBuyer, WholesaleProduct, WholesaleEnquiry } from './wholesale-models.js';
 import { initialProducts, initialPosts } from '../shared/catalog.js';
 import { seedWholesaleCatalog } from './wholesale-import.js';
@@ -42,7 +43,7 @@ async function seedCatalog(config) {
 
 export async function initializeDatabase(config, {
   driver = mongoose,
-  initializeIndexes = () => Promise.all([Product, Post, User, Message, Subscriber, Setup, LedgerCustomer, Sale, WholesaleBuyer, WholesaleProduct, WholesaleEnquiry].map(model => model.init())),
+  initializeIndexes = () => Promise.all([Product, Post, User, Message, Subscriber, Setup, LedgerCustomer, Sale, WholesaleBuyer, WholesaleProduct, WholesaleEnquiry, BusinessContact, ExpenseRecord].map(model => model.init())),
   seed = () => seedCatalog(config),
 } = {}) {
   if (!config.mongoUri) {

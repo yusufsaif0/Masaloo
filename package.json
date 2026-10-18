@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "engines": { "node": ">=22.12.0 <23" },
+  "engines": {
+    "node": ">=22.12.0 <23"
+  },
   "scripts": {
     "dev": "concurrently -k -n api,web -c yellow,green \"node --watch server/index.js\" \"vite --host 127.0.0.1\"",
     "build": "vite build",
@@ -15,6 +17,7 @@
     "test:finance": "node scripts/check-finance-browser.mjs",
     "test:wholesale": "node scripts/check-wholesale-browser.mjs",
     "test:production": "node scripts/check-production.mjs",
+    "test:operations": "node scripts/check-operations-browser.mjs",
     "scrape:wholesale": "node scripts/scrape-wholesale.mjs",
     "setup:local": "node scripts/prepare-local.mjs"
   },
@@ -33,6 +36,7 @@
     "react-dom": "^19.1.1",
     "react-router-dom": "^7.9.1",
     "sharp": "^0.35.5",
+    "tesseract.js": "6.0.1",
     "zod": "^4.1.11"
   },
   "devDependencies": {

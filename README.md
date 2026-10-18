@@ -104,6 +104,22 @@ Owners can cancel an incorrect, fully unpaid bill or opening balance with a reas
 
 Financial values are computed and stored as integer paise. Dates and month boundaries use India time (Asia/Kolkata). No sample financial records are added to the real database.
 
+## Bills, salary, rent, and business contacts
+
+Owners and managers have three additional admin modules:
+
+- **Bills & receipts:** choose a JPG, PNG or WebP image up to 5 MB. Select **Read text & amount** to read Hindi and English. The review popup shows the image, extracted text, suggested supplier, bill number, date and total. Correct the fields, enter the due date and any amount already paid, check the review confirmation, then select **Save reviewed bill**. Preview processing holds the image in memory; it does not create a record or persist an image. You can enter details manually if recognition fails or the photo is unclear. Review is always required, even when OCR confidence is high.
+- **Salary & rent:** create an employee salary or shop-rent record with the payee, reference month, amount, record date and due date. Record full or partial payments and see the remaining amount, overdue status and dated payment history. Filters include the salary/rent reference month, type, payment status and payee. Add each month's record manually; saving a record does not transfer money. Duplicate payee/month entries are refused, and retrying the same payment does not record it twice. Only an owner may cancel a fully unpaid record; paid records and payment history are retained.
+- **Business contacts:** add customers, hotels and suppliers, with contact person, phone, email, address, GST number and notes. Search, filter, edit, archive and restore contacts. This directory is separate from customer account registration and the existing Udhari ledger; adding a contact does not create a login or an opening balance.
+
+These records are outgoing expenses. They do not change retail/wholesale prices, sales totals, product rankings, stock, customer udhari or confirmed orders. Due-date status is shown inside the module; no bank payment is sent.
+
+Bill images are re-encoded to WebP under `UPLOAD_DIR/private-bills/`. They are served only through authenticated owner/manager endpoints, with private/no-store caching. They are not public `/uploads` URLs. Include the entire upload directory, including this subdirectory, in volume backups and migrations. Images remain available after an application restart when the same persistent volume is mounted. OCR text and reviewed details are stored in MongoDB alongside the expense record.
+
+OCR runs locally on the server using bundled Hindi and English models under `data/ocr/`, with their license and checksums. Include that directory and normal production dependencies in the Railway application bundle. No OCR account, API key, new environment variables, or external image hosting is needed. One job runs at a time per application process and stops after 45 seconds; manual entry remains available. Printed, straight, well-lit bills work best. Handwriting and poor images may need manual correction.
+
+After building, run `npm run test:operations` for the isolated browser check, covering contacts, salary/rent payments, real image reading, editing before save, private image access and mobile layouts. `npm test` includes the API, actual OCR, Hindi parsing, duplicate submission, concurrent-payment and role checks. Both use generated local test databases and temporary uploads.
+
 ## Wholesale marketplace
 
 **Wholesale** appears immediately after **Shop** in the main navigation. Its accounts, catalog, prices, and bag are separate from the retail shop and admin accounts.

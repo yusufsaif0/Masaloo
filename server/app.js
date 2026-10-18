@@ -14,6 +14,7 @@ import { Product, Post, User, Message, Subscriber, Setup } from './models.js';
 import { initialProducts, initialPosts } from '../shared/catalog.js';
 import { registerSchema, adminRegisterSchema, loginSchema, productSchema, postSchema, contactSchema, emailSchema } from './validation.js';
 import { financeRouter } from './finance-router.js';
+import { operationsRouter } from './operations-router.js';
 import { wholesalePublicRouter, wholesaleAdminRouter } from './wholesale-router.js';
 import { readConfig, root } from './config.js';
 import { createImageStorage, ImageError } from './image-storage.js';
@@ -146,6 +147,7 @@ export function createApp({ config = readConfig(), storage = createImageStorage(
 
   app.use('/api/admin', requireDb, requireAuth, allow('owner', 'manager', 'editor'));
   app.use('/api/admin/finance', allow('owner', 'manager'), financeRouter());
+  app.use('/api/admin/operations', allow('owner', 'manager'), operationsRouter({ storage }));
   app.use('/api/admin/wholesale', allow('owner', 'manager'), wholesaleAdminRouter({ storage }));
   app.get('/api/admin/overview', async (req, res) => {
     const [products, posts, messages, subscribers] = await Promise.all([Product.countDocuments(), Post.countDocuments(), Message.countDocuments(), Subscriber.countDocuments()]);
